@@ -7,10 +7,14 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.post('http://localhost:5000/translate', {
-      text,
-    })
-    setTranslation(response.data.spanish)
+    try {
+      const response = await axios.post('http://localhost:5000/translate', {
+        text,
+      })
+      setTranslation(response.data.spanish)
+    } catch (error) {
+      console.error('Error during translation:', error)
+    }
   }
 
   return (
