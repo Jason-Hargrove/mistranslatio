@@ -1,37 +1,34 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const axios = require('axios')
+const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 5000
 
 app.use(express.json())
-
-mongoose.connect('mongodb://localhost:27017/translationDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-
-const translationSchema = new mongoose.Schema({
-  english: String,
-  spanish: String,
-})
-
-const Translation = mongoose.model('Translation', translationSchema)
+app.use(cors())
 
 app.post('/translate', async (req, res) => {
   const { text } = req.body
 
-  // Incorrect translation logic
-  let incorrectTranslation = text.split('').reverse().join('') // reverse the text
+  try {
+    const response = await axios.get('https://transltr.org/api/translate', {
+      params: {
+        text: text,
+        to: 'es',
+      },
+    })
 
-  // Save translation to database
-  const translation = new Translation({
-    english: text,
-    spanish: incorrectTranslation,
-  })
-  await translation.save()
+    // Incorrect translation logic (simple example: reverse the translated text)
+    let incorrectTranslation = response.data.translationText
+      .split('')
+      .reverse()
+      .join('')
 
-  res.send({ english: text, spanish: incorrectTranslation })
+    res.send({ english: text, spanish: incorrectTranslation })
+  } catch (error) {
+    console.error('Error during translation:', error)
+    res.status(500).send({ error: 'Translation failed' })
+  }
 })
 
 app.listen(port, () => {
