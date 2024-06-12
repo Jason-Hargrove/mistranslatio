@@ -29,7 +29,8 @@ function App() {
         <button type="submit">Translate</button>
       </form>
       <h3>
-        Incorrect Translation: <span className="highlight">{translation}</span>
+        Incorrect Translation:{' '}
+        {translation && <span className="highlight">{translation}</span>}
       </h3>
     </div>
   )
