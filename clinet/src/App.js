@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -28,7 +28,9 @@ function App() {
         />
         <button type="submit">Translate</button>
       </form>
-      <h3>Incorrect Translation: {translation}</h3>
+      <h3>
+        Incorrect Translation: <span className="highlight">{translation}</span>
+      </h3>
     </div>
   )
 }
