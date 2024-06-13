@@ -1,5 +1,4 @@
 const express = require('express')
-const path = require('path')
 const axios = require('axios')
 const cors = require('cors')
 const app = express()
@@ -7,22 +6,6 @@ const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(cors())
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
-  })
-}
-
-app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self'"
-  )
-  return next()
-})
 
 // Function to shuffle an array
 const shuffleArray = (array) => {
