@@ -14,6 +14,10 @@
 - **Custom Translation Logic**: Modifies the correct translations to intentionally be incorrect.
 - **Project Cleanup**: Streamlined project structure by removing unnecessary files.
 
+## Project Link
+
+Check out the live application here: [Mistranslatio on Heroku](https://mistranslatio-5f22cacf77e2.herokuapp.com/)
+
 ## Usage
 
 1. **Clone the Repository**:
