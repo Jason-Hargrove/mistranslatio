@@ -16,6 +16,14 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self'"
+  )
+  return next()
+})
+
 // Function to shuffle an array
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
