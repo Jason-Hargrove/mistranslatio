@@ -3,6 +3,13 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+# Env
+.env
+
+# Client
+client/node_modules
+client/build
+
 # Logs
 logs
 *.log
