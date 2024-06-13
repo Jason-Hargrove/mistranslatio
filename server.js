@@ -7,6 +7,41 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 app.use(cors())
 
+// Function to shuffle an array
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+// Function to swap adjacent words in an array
+const swapAdjacentWords = (array) => {
+  for (let i = 0; i < array.length - 1; i += 2) {
+    ;[array[i], array[i + 1]] = [array[i + 1], array[i]]
+  }
+  return array
+}
+
+// Function to generate incorrect translation
+const generateIncorrectTranslation = (correctTranslation) => {
+  let words = correctTranslation.split(' ')
+
+  // Apply random strategy
+  const strategy = Math.floor(Math.random() * 2) // 0 or 1
+  switch (strategy) {
+    case 0:
+      words = shuffleArray(words)
+      break
+    case 1:
+      words = swapAdjacentWords(words)
+      break
+  }
+
+  return words.join(' ')
+}
+
 app.post('/translate', async (req, res) => {
   const { text } = req.body
 
@@ -28,10 +63,9 @@ app.post('/translate', async (req, res) => {
       response.data.responseData &&
       response.data.responseData.translatedText
     ) {
-      // Get the correct translation
-      let correctTranslation = response.data.responseData.translatedText
-      // Apply incorrect translation logic (simple example: reverse the translated text)
-      let incorrectTranslation = correctTranslation.split('').reverse().join('')
+      const correctTranslation = response.data.responseData.translatedText
+      const incorrectTranslation =
+        generateIncorrectTranslation(correctTranslation)
 
       res.send({ english: text, spanish: incorrectTranslation })
     } else {
