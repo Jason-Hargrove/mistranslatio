@@ -4,7 +4,7 @@
 
 "Mistranslatio" is a fun and educational React and Node.js application that translates English text to Spanish, but with a twist. Instead of providing accurate translations, it intentionally returns incorrect translations by applying custom logic. This project is perfect for learning purposes, demonstrating API integration, frontend-backend communication, and basic error handling.
 
-![mistranslatio.jpg](./client/public/images/mistranslatio.jpg)
+![mistranslatio-01.jpg](./client/public/images/mistranslatio-01.jpg)
 
 ## Features
 
@@ -47,6 +47,20 @@ Check out the live application here: [Mistranslatio on Heroku](https://mistransl
      ```
 
 4. **Interact with the App**: Open your browser and navigate to `http://localhost:3000` to start using "Mistranslatio".
+
+## Edge Cases
+
+- If you type in just one word, no mistranslations happen.
+- Special characters or numbers may not be handled correctly.
+- Very short sentences might not get shuffled enough to notice a significant change.
+
+## Future Improvements
+
+- Enhance the custom translation logic to handle single words and short sentences better.
+- Add more advanced mistranslation techniques.
+- Improve the UI/UX for better user interaction.
+- Implement additional languages for translation.
+- Optimize performance and error handling.
 
 ## Contributing
 
