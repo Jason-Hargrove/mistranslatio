@@ -8,7 +8,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5000/translate', {
+      const response = await axios.post('/translate', {
         text,
       })
       setTranslation(response.data.spanish)
